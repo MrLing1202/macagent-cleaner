@@ -1,19 +1,8 @@
----
-AIGC:
-    Label: "1"
-    ContentProducer: 001191440300708461136T1XGW3
-    ProduceID: 23495379e47c99e3552e60753e6b5db6_47bf2498d86c11f1bc41525400638852
-    ReservedCode1: PjA5NQOWB7CEB7PB4vY/ZGuY8FweEdMH6mSknDliQFD2Zag/JoNsKp9+IUmaf/IIfpTAyKQ0bu7tG37C3FalDMiHS+qsnntiMK3jt+mYGyD7rUXGFsFGqzOivaI2zsBI9dzg5LQ3qv0O/b/bWmJlHQkVKLSW9KsK4I9P2+rrlP27I6fMRhEqVTalq1c=
-    ContentPropagator: 001191440300708461136T1XGW3
-    PropagateID: 23495379e47c99e3552e60753e6b5db6_47bf2498d86c11f1bc41525400638852
-    ReservedCode2: PjA5NQOWB7CEB7PB4vY/ZGuY8FweEdMH6mSknDliQFD2Zag/JoNsKp9+IUmaf/IIfpTAyKQ0bu7tG37C3FalDMiHS+qsnntiMK3jt+mYGyD7rUXGFsFGqzOivaI2zsBI9dzg5LQ3qv0O/b/bWmJlHQkVKLSW9KsK4I9P2+rrlP27I6fMRhEqVTalq1c=
----
-
 # mac-sweep
 
 一个面向 macOS 的本地磁盘清理工具：只读扫描磁盘占用 → 按风险分级 → 将可清理项**移入废纸篓**（绝不永久删除）。内置**眼动仪友好**的本地网页 UI：大按钮、大字号、清晰路径展示。
 
-> 本项目纯 Python 标准库实现，零第三方依赖，可在本地直接运行，也可直接上传 GitHub。
+> 本项目纯 Python 标准库实现，零第三方依赖，可在本地直接运行。
 
 ---
 
@@ -125,4 +114,3 @@ python3 cleaner.py --trash
 ## 📄 开源协议
 
 [MIT](LICENSE) © 2026 mac-sweep contributors
-
