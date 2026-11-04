@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""macagent-cleaner - 本地网页 UI（眼动仪友好）
+"""mac-sweep - 本地网页 UI（眼动仪友好）
 
 启动本地 HTTP 服务（默认 127.0.0.1:8765），浏览器打开即可操作：
   - 大按钮、大字号、清晰路径展示（眼动仪友好）
@@ -48,7 +48,7 @@ PAGE = """<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>macagent-cleaner - 磁盘清理</title>
+<title>mac-sweep - 磁盘清理</title>
 <style>
   :root {
     --bg: #f5f6f8; --card: #ffffff; --ink: #1a1d21;
@@ -103,7 +103,7 @@ PAGE = """<!DOCTYPE html>
 </style>
 </head>
 <body>
-  <h1>🧹 macagent-cleaner</h1>
+  <h1>🧹 mac-sweep</h1>
   <div class="sub">macOS 磁盘清理 · 只读扫描 · 移入废纸篓（绝不永久删除）</div>
 
   <div class="danger-note">
@@ -298,12 +298,12 @@ class Handler(BaseHTTPRequestHandler):
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="macagent-cleaner 本地网页 UI")
+    parser = argparse.ArgumentParser(description="mac-sweep 本地网页 UI")
     parser.add_argument("--port", type=int, default=PORT, help=f"监听端口（默认 {PORT}）")
     args = parser.parse_args()
 
     server = ThreadingHTTPServer((HOST, args.port), Handler)
-    print(f"macagent-cleaner Web UI 已启动： http://{HOST}:{args.port}")
+    print(f"mac-sweep Web UI 已启动： http://{HOST}:{args.port}")
     print("按 Ctrl+C 停止服务。")
     try:
         server.serve_forever()

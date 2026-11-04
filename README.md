@@ -1,4 +1,4 @@
-# macagent-cleaner
+# mac-sweep
 
 一个面向 macOS 的本地磁盘清理工具：只读扫描磁盘占用 → 按风险分级 → 将可清理项**移入废纸篓**（绝不永久删除）。内置**眼动仪友好**的本地网页 UI：大按钮、大字号、清晰路径展示。
 
@@ -29,7 +29,7 @@
 ## 📁 项目结构
 
 ```
-macagent-cleaner/
+mac-sweep/
 ├── scanner.py          # 磁盘扫描 + 三级风险分级（只读）
 ├── cleaner.py          # 安全校验 + 移入废纸篓
 ├── webui.py            # 本地网页 UI（眼动仪友好）
@@ -46,7 +46,7 @@ macagent-cleaner/
 ### 方式一：网页 UI（推荐）
 
 ```bash
-cd macagent-cleaner
+cd mac-sweep
 python3 webui.py
 ```
 
@@ -113,4 +113,4 @@ python3 cleaner.py --trash
 
 ## 📄 开源协议
 
-[MIT](LICENSE) © 2026 macagent-cleaner contributors
+[MIT](LICENSE) © 2026 mac-sweep contributors

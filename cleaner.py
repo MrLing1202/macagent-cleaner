@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""macagent-cleaner - 清理器（移入废纸篓，绝不永久删除）
+"""mac-sweep - 清理器（移入废纸篓，绝不永久删除）
 
 接收待清理路径列表，逐项安全校验后移入废纸篓 (~/.Trash)。
 
@@ -151,7 +151,7 @@ def clean(paths) -> dict:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="macagent-cleaner 清理器（移入废纸篓）")
+    parser = argparse.ArgumentParser(description="mac-sweep 清理器（移入废纸篓）")
     parser.add_argument("--paths", help="JSON 数组字符串，如 '[\"/path\"]'")
     parser.add_argument("--stdin", action="store_true", help="从标准输入读取 {\"paths\": [...]}")
     parser.add_argument("--trash", action="store_true", help="打印废纸篓路径并退出（自检）")
