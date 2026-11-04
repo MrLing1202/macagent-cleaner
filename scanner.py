@@ -62,6 +62,58 @@ SCAN_ROOTS = {
 # 应用支持目录下，仅收集名称含 cache 的子目录（避免误伤应用真实数据）
 CACHE_NAME_HINT = "cache"
 
+# ---------------------------------------------------------------------------
+# 软件归属识别（agent 软件自动归类）
+# ---------------------------------------------------------------------------
+
+# 路径关键词 -> (软件名, 归类)。按顺序匹配，命中即归属。
+# 关键词用小写，匹配路径的目录名片段。
+VENDOR_RULES = [
+    (("opencodedesktop",),         "OpenCode",        "终端 CLI"),
+    (("trae",),                    "Trae",            "IDE 编辑器"),
+    (("qoder",),                   "Qoder",           "IDE 编辑器"),
+    (("cursor",),                  "Cursor",          "IDE 编辑器"),
+    (("windsurf",),                "Windsurf",        "IDE 编辑器"),
+    (("claude",),                  "Claude Code",     "终端 CLI"),
+    (("opencode",),                "OpenCode",        "终端 CLI"),
+    (("codex",),                   "Codex CLI",       "终端 CLI"),
+    (("gemini",),                  "Gemini CLI",      "终端 CLI"),
+    (("zcode",),                   "ZCode",           "桌面客户端"),
+    (("raccoon",),                 "Raccoon",         "桌面客户端"),
+    (("workbuddy",),               "WorkBuddy",       "桌面客户端"),
+    (("marvis",),                  "Marvis",          "桌面客户端"),
+    (("mmx-agent",),               "MMX Agent",       "桌面客户端"),
+    (("agnescode",),               "AgnesCode",       "桌面客户端"),
+    (("puppeteer",),               "Puppeteer",       "开发工具"),
+    (("playwright",),              "Playwright",      "开发工具"),
+    (("homebrew",),                "Homebrew",        "开发工具"),
+    (("cacache",),                 "npm",             "开发工具"),
+    (("node-gyp",),                "node-gyp",        "开发工具"),
+    (("electron-builder",),        "electron-builder","开发工具"),
+    (("_npx",),                    "npm",             "开发工具"),
+    (("tabbit",),                  "Tabbit",          "浏览器"),
+    (("bambu",),                   "Bambu Studio",    "应用"),
+]
+
+# 段级精确匹配（避免短词子串误判）
+VENDOR_SEGMENT_RULES = [
+    (("uv",),                      "uv",              "开发工具"),
+    (("node",),                    "Node.js",         "开发工具"),
+    (("edge",),                    "Microsoft Edge",  "浏览器"),
+]
+
+def _identify_vendor(path_str: str):
+    """根据路径识别归属软件与归类；未命中返回 (None, None)。"""
+    low = path_str.lower()
+    for keywords, name, cat in VENDOR_RULES:
+        if any(k in low for k in keywords):
+            return name, cat
+    low_parts = {p.lower() for p in Path(path_str).parts}
+    for keywords, name, cat in VENDOR_SEGMENT_RULES:
+        if any(k in low_parts for k in keywords):
+            return name, cat
+    return None, None
+
 
 # ---------------------------------------------------------------------------
 # 扫描实现（只读）
@@ -128,11 +180,14 @@ def scan() -> dict:
                         continue
                     size = _dir_size(child)
                     if size > 0:
+                        vendor, vendor_category = _identify_vendor(str(child))
                         items.append({
                             "path": str(child),
                             "size": size,
                             "risk": risk,
                             "category": category,
+                            "vendor": vendor,
+                            "vendor_category": vendor_category,
                         })
             except (OSError, PermissionError):
                 continue

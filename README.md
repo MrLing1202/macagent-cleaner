@@ -1,3 +1,14 @@
+---
+AIGC:
+    Label: "1"
+    ContentProducer: 001191440300708461136T1XGW3
+    ProduceID: 23495379e47c99e3552e60753e6b5db6_ad988bf3d87411f1bc41525400638852
+    ReservedCode1: hfA+GGVajlKg/O7uCZH0lx6QfpWQtjoBXRFd78eEgTh+eIW7my5/5zpgr5g6LUSvVyFuDpKXvZdNJo8JPxw9oHGdASgQ3he8cm5A6VnX257jr1V9M6W+7Rm5OzP5be1hY17btn2wFbLbYUXAhN/Yafy5YSZGCq6mSgpqrXjRxVJF8x/1Iusyi0vk3Bs=
+    ContentPropagator: 001191440300708461136T1XGW3
+    PropagateID: 23495379e47c99e3552e60753e6b5db6_ad988bf3d87411f1bc41525400638852
+    ReservedCode2: hfA+GGVajlKg/O7uCZH0lx6QfpWQtjoBXRFd78eEgTh+eIW7my5/5zpgr5g6LUSvVyFuDpKXvZdNJo8JPxw9oHGdASgQ3he8cm5A6VnX257jr1V9M6W+7Rm5OzP5be1hY17btn2wFbLbYUXAhN/Yafy5YSZGCq6mSgpqrXjRxVJF8x/1Iusyi0vk3Bs=
+---
+
 # 🧹 macagent-cleaner
 
 <p align="center">
@@ -41,19 +52,29 @@ macagent-cleaner 是运行在你 Mac 上的轻量清理器，专门为 **agent �
 - 所有清理一律移入 `~/.Trash`，可随时恢复
 - 绝不永久删除，是否清空由你决定
 
+### 🏷️ 软件归属自动识别
+- 扫描到的每个缓存目录自动识别**归属软件**与**归类**（如 `@qoder-updater/Cache` → **Qoder · IDE 编辑器**）
+- 不用猜路径，一眼看出缓存在为谁打工
+
+### ⏰ 定时自动检查
+- 页面内置自动检查：每 5 / 15 / 30 / 60 分钟自动重新扫描
+- 可清理量达到提醒阈值（100 MB / 500 MB / 1 GB）时状态栏醒目提示
+
 ### 🖥️ 眼动仪友好界面
 - 本地网页 UI，仅绑定 `127.0.0.1`
 - 大按钮、大字号、清晰路径，无手也能轻松操作
 
 ## 🚀 快速开始
 
-要求：macOS 10.15+，Python 3.8+，零第三方依赖。
+要求：macOS 10.15+，Python 3.8+，零第三方依赖（暂不支持 Linux，见[开发计划](#-开发计划)）。
 
 ```bash
 python3 webui.py
 ```
 
 浏览器打开 <http://127.0.0.1:8765>，点击「扫描磁盘占用」，勾选后点击「移入废纸篓」。
+
+界面顶部可开启**自动检查**：选择间隔与提醒阈值，页面会定时重新扫描并在达到阈值时提示。
 
 命令行模式：
 
@@ -64,38 +85,40 @@ python3 cleaner.py --paths '["/Users/me/Library/Caches/com.apple.Safari"]'
 
 ## 🖼️ 界面预览
 
-真实运行截图（macOS，扫描结果 2.2 GB 可清理）：
+真实运行截图（macOS，`http://127.0.0.1:8765`，扫描结果 2.3 GB 可清理）：
 
-| 扫描结果分级 | 勾选待清理 |
+| 扫描结果分级 | 开启定时自动检查 |
 | --- | --- |
 | ![main](docs/main.png) | ![clean](docs/clean.png) |
 
-左侧为三级风险分区展示，右侧为低风险默认勾选、一键移入废纸篓的状态。
+左侧为三级风险分区展示（低风险默认勾选），右侧为开启「自动检查 · 每 5 分钟」后的状态。
 
 ## 🧹 它在清谁的缓存
 
-市面上常见的 agent 类软件，按形态归类（本工具扫描时重点覆盖这类软件的更新缓存目录）：
+扫描结果中，每个缓存目录会**自动标注归属徽标**（软件名 + 归类），不再是一串看不懂的路径。
 
-| 软件 | 归类 | 说明 |
+| 路径关键词（示例） | 识别为 | 归类 |
 | --- | --- | --- |
-| Cursor | IDE 编辑器 | VS Code 内核编码助手，Agent 模式 |
-| Windsurf | IDE 编辑器 | Flow 式编码体验，自研模型 |
-| Trae | IDE 编辑器 | 原生轻量 IDE，Builder 模式 |
-| Qoder | IDE 编辑器 | 企业级智能编程平台 |
-| Kiro | IDE 编辑器 | 多文件编辑与任务规划 |
-| Cline | IDE 插件 | 开源 VS Code 扩展 |
-| Claude Code | 终端 CLI | 终端优先的 agent 工作流 |
-| Codex CLI | 终端 CLI | 终端编码代理 |
-| Gemini CLI | 终端 CLI | 终端编码代理 |
-| OpenCode | 终端 CLI | 开源终端 agent |
-| ZCode | 桌面客户端 | 桌面 agent 客户端 |
-| Raccoon | 桌面客户端 | 桌面 agent 客户端 |
-| WorkBuddy | 桌面客户端 | 桌面 agent 客户端 |
-| Marvis | 桌面客户端 | 本地 agent 运行环境 |
-| Lovable | 浏览器平台 | 网页零配置构建 |
-| Bolt | 浏览器平台 | 网页快速原型 |
-| v0 | 浏览器平台 | Vercel 网页生成 |
-| Firebase Studio | 浏览器平台 | 浏览器端开发环境 |
+| `@qoder-updater` | Qoder | IDE 编辑器 |
+| `Trae` | Trae | IDE 编辑器 |
+| `Cursor` | Cursor | IDE 编辑器 |
+| `Windsurf` | Windsurf | IDE 编辑器 |
+| `Claude` | Claude Code | 终端 CLI |
+| `Codex` | Codex CLI | 终端 CLI |
+| `Gemini` | Gemini CLI | 终端 CLI |
+| `OpenCode` / `opencodedesktop` | OpenCode | 终端 CLI |
+| `ZCode` | ZCode | 桌面客户端 |
+| `Raccoon` | Raccoon | 桌面客户端 |
+| `WorkBuddy` | WorkBuddy | 桌面客户端 |
+| `Marvis` | Marvis | 桌面客户端 |
+| `mmx-agent` | MMX Agent | 桌面客户端 |
+| `AgnesCode` | AgnesCode | 桌面客户端 |
+| `Playwright` / `Puppeteer` | Playwright / Puppeteer | 开发工具 |
+| `Homebrew` / `uv` / `node-gyp` | Homebrew / uv / node-gyp | 开发工具 |
+| `Tabbit` | Tabbit | 浏览器 |
+| `Bambu` | Bambu Studio | 应用 |
+
+> 匹配规则集中在 `scanner.py` 的 `VENDOR_RULES`，未命中的目录标记为通用项，可自行扩展。
 
 ## 🔒 安全边界
 
@@ -127,7 +150,9 @@ macagent-cleaner/
 - [x] 废纸篓清理与安全校验
 - [x] 本地网页界面
 - [x] 真实运行截图
-- [ ] 定时扫描提醒
+- [x] 软件归属自动识别
+- [x] 定时自动检查（间隔 + 阈值提醒）
+- [ ] Linux 路径适配（`~/.cache` / `~/.config` 体系）
 - [ ] 清理统计与报告导出
 - [ ] 更多 agent 软件缓存目录覆盖
 
@@ -144,3 +169,4 @@ macagent-cleaner/
 <p align="center">
   ⭐ 觉得有用？给个 Star 支持一下！
 </p>
+*（内容由AI生成，仅供参考）*

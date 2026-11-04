@@ -94,6 +94,7 @@ PAGE = """<!DOCTYPE html>
   .tag-low { background: var(--green-bg); color: var(--green); }
   .tag-confirm { background: var(--orange-bg); color: var(--orange); }
   .tag-forbidden { background: var(--gray-bg); color: var(--gray); }
+  .tag-vendor { background: #e8f0fe; color: #1a56b0; }
   .hint { font-size: 16px; color: #8a8f98; margin-top: 8px; }
   .empty { color: #8a8f98; padding: 12px 0; font-size: 18px; }
   .summary { font-size: 22px; font-weight: 600; margin: 12px 0; }
@@ -114,6 +115,20 @@ PAGE = """<!DOCTYPE html>
 
   <div class="bar">
     <button class="btn btn-primary" id="btnScan" onclick="runScan()">扫描磁盘占用（只读）</button>
+    <label for="autoInterval" style="font-size:17px;color:#5c626b;margin-left:12px;">自动检查</label>
+    <select id="autoInterval" onchange="toggleAutoCheck()" style="font-size:17px;padding:6px 10px;border-radius:8px;border:1px solid var(--border);">
+      <option value="0">关闭</option>
+      <option value="5">每 5 分钟</option>
+      <option value="15" selected>每 15 分钟</option>
+      <option value="30">每 30 分钟</option>
+      <option value="60">每 60 分钟</option>
+    </select>
+    <label for="autoThreshold" style="font-size:17px;color:#5c626b;margin-left:12px;">提醒阈值</label>
+    <select id="autoThreshold" onchange="toggleAutoCheck()" style="font-size:17px;padding:6px 10px;border-radius:8px;border:1px solid var(--border);">
+      <option value="104857600">100 MB</option>
+      <option value="524288000" selected>500 MB</option>
+      <option value="1073741824">1 GB</option>
+    </select>
     <span class="status" id="status">尚未扫描</span>
   </div>
 
@@ -128,6 +143,19 @@ PAGE = """<!DOCTYPE html>
 
 <script>
 let lastScan = null;
+let autoTimer = null;
+
+function toggleAutoCheck() {
+  const mins = parseInt(document.getElementById("autoInterval").value, 10);
+  if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+  const status = document.getElementById("status");
+  if (mins > 0) {
+    autoTimer = setInterval(runScan, mins * 60 * 1000);
+    status.textContent = `自动检查已开启：每 ${mins} 分钟，阈值 ${fmtSize(parseInt(document.getElementById("autoThreshold").value, 10))}`;
+  } else {
+    status.textContent = "自动检查已关闭";
+  }
+}
 
 function fmtSize(n) {
   const units = ["B","KB","MB","GB","TB"];
@@ -183,17 +211,25 @@ function render(data) {
   const actionBar = document.getElementById("actionBar");
   if (low.length + confirm.length > 0) actionBar.style.display = "flex";
   document.getElementById("actionBar").style.display = "flex";
-  document.getElementById("status").textContent = `扫描完成：可清理 ${fmtSize((s.low_risk||0)+(s.need_confirm||0))}`;
+  const total = (s.low_risk||0) + (s.need_confirm||0);
+  let st = `扫描完成：可清理 ${fmtSize(total)}`;
+  const th = parseInt(document.getElementById("autoThreshold").value, 10);
+  if (autoTimer && total >= th) st += "  ⚠️ 达到自动检查阈值";
+  document.getElementById("status").textContent = st;
 }
 
 function itemHtml(it) {
   const tag = it.risk === "low_risk"
     ? '<span class="tag tag-low">低风险</span>'
     : '<span class="tag tag-confirm">需确认</span>';
+  const vendor = it.vendor
+    ? `<span class="tag tag-vendor">${esc(it.vendor)}${it.vendor_category ? " · " + esc(it.vendor_category) : ""}</span>`
+    : "";
   const checked = it.risk === "low_risk" ? "checked" : "";
   return `<div class="item">
     <input type="checkbox" data-risk="${it.risk}" ${checked}>
     ${tag}
+    ${vendor}
     <span class="path">${esc(it.path)}</span>
     <span class="size">${fmtSize(it.size)}</span>
   </div>`;
