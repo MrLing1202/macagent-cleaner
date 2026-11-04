@@ -1,13 +1,3 @@
----
-AIGC:
-    Label: "1"
-    ContentProducer: 001191440300708461136T1XGW3
-    ProduceID: 23495379e47c99e3552e60753e6b5db6_ad988bf3d87411f1bc41525400638852
-    ReservedCode1: hfA+GGVajlKg/O7uCZH0lx6QfpWQtjoBXRFd78eEgTh+eIW7my5/5zpgr5g6LUSvVyFuDpKXvZdNJo8JPxw9oHGdASgQ3he8cm5A6VnX257jr1V9M6W+7Rm5OzP5be1hY17btn2wFbLbYUXAhN/Yafy5YSZGCq6mSgpqrXjRxVJF8x/1Iusyi0vk3Bs=
-    ContentPropagator: 001191440300708461136T1XGW3
-    PropagateID: 23495379e47c99e3552e60753e6b5db6_ad988bf3d87411f1bc41525400638852
-    ReservedCode2: hfA+GGVajlKg/O7uCZH0lx6QfpWQtjoBXRFd78eEgTh+eIW7my5/5zpgr5g6LUSvVyFuDpKXvZdNJo8JPxw9oHGdASgQ3he8cm5A6VnX257jr1V9M6W+7Rm5OzP5be1hY17btn2wFbLbYUXAhN/Yafy5YSZGCq6mSgpqrXjRxVJF8x/1Iusyi0vk3Bs=
----
 
 # 🧹 macagent-cleaner
 
@@ -169,4 +159,4 @@ macagent-cleaner/
 <p align="center">
   ⭐ 觉得有用？给个 Star 支持一下！
 </p>
-*（内容由AI生成，仅供参考）*
+**
