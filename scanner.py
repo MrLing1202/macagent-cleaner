@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""mac-sweep - 磁盘占用扫描与缓存分级（只读）
+"""macagent-cleaner - 磁盘占用扫描与缓存分级（只读）
 
 扫描 macOS 用户目录下常见可清理位置，按风险分级输出 JSON：
   - low_risk       低风险，可安全清理（系统缓存、日志等）
@@ -165,7 +165,7 @@ def scan() -> dict:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="mac-sweep 只读扫描器")
+    parser = argparse.ArgumentParser(description="macagent-cleaner 只读扫描器")
     parser.add_argument("--output", "-o", help="将 JSON 结果写入指定文件")
     args = parser.parse_args()
 

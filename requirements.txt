@@ -1,4 +1,4 @@
-# mac-sweep 运行时依赖
+# macagent-cleaner 运行时依赖
 # 本项目基于 Python 3 标准库实现（os / pathlib / shutil / http.server），
 # 无需任何第三方依赖。直接运行即可：
 #
