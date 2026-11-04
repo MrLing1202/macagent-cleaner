@@ -94,7 +94,8 @@ PAGE = """<!DOCTYPE html>
   .tag-low { background: var(--green-bg); color: var(--green); }
   .tag-confirm { background: var(--orange-bg); color: var(--orange); }
   .tag-forbidden { background: var(--gray-bg); color: var(--gray); }
-  .tag-vendor { background: #e8f0fe; color: #1a56b0; }
+  .tag-vendor { background: #f0f1f3; color: #6b7280; }
+  .tag-agent { background: #1a56b0; color: #ffffff; }
   .hint { font-size: 16px; color: #8a8f98; margin-top: 8px; }
   .empty { color: #8a8f98; padding: 12px 0; font-size: 18px; }
   .summary { font-size: 22px; font-weight: 600; margin: 12px 0; }

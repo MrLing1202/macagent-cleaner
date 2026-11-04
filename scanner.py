@@ -63,39 +63,95 @@ SCAN_ROOTS = {
 CACHE_NAME_HINT = "cache"
 
 # ---------------------------------------------------------------------------
-# 软件归属识别（agent 软件自动归类）
+# 软件归属识别（agent 软件全量覆盖，非 agent 工具降级识别）
 # ---------------------------------------------------------------------------
 
 # 路径关键词 -> (软件名, 归类)。按顺序匹配，命中即归属。
 # 关键词用小写，匹配路径的目录名片段。
-VENDOR_RULES = [
-    (("opencodedesktop",),         "OpenCode",        "终端 CLI"),
-    (("trae",),                    "Trae",            "IDE 编辑器"),
-    (("qoder",),                   "Qoder",           "IDE 编辑器"),
-    (("cursor",),                  "Cursor",          "IDE 编辑器"),
-    (("windsurf",),                "Windsurf",        "IDE 编辑器"),
-    (("claude",),                  "Claude Code",     "终端 CLI"),
-    (("opencode",),                "OpenCode",        "终端 CLI"),
-    (("codex",),                   "Codex CLI",       "终端 CLI"),
-    (("gemini",),                  "Gemini CLI",      "终端 CLI"),
-    (("zcode",),                   "ZCode",           "桌面客户端"),
-    (("raccoon",),                 "Raccoon",         "桌面客户端"),
-    (("workbuddy",),               "WorkBuddy",       "桌面客户端"),
-    (("marvis",),                  "Marvis",          "桌面客户端"),
-    (("mmx-agent",),               "MMX Agent",       "桌面客户端"),
-    (("agnescode",),               "AgnesCode",       "桌面客户端"),
-    (("puppeteer",),               "Puppeteer",       "开发工具"),
-    (("playwright",),              "Playwright",      "开发工具"),
-    (("homebrew",),                "Homebrew",        "开发工具"),
-    (("cacache",),                 "npm",             "开发工具"),
-    (("node-gyp",),                "node-gyp",        "开发工具"),
-    (("electron-builder",),        "electron-builder","开发工具"),
-    (("_npx",),                    "npm",             "开发工具"),
-    (("tabbit",),                  "Tabbit",          "浏览器"),
-    (("bambu",),                   "Bambu Studio",    "应用"),
+# agent 软件是核心归类：全网主流 agent 类工具全部收录，徽标作为特色重点。
+AGENT_VENDOR_RULES = [
+    # --- agentic IDE / 编辑器 ---
+    (("opencodedesktop",),         "OpenCode",          "agentic IDE"),
+    (("trae",),                    "Trae",              "agentic IDE"),
+    (("qoder",),                   "Qoder",             "agentic IDE"),
+    (("cursor",),                  "Cursor",            "agentic IDE"),
+    (("windsurf",),                "Windsurf",          "agentic IDE"),
+    (("zcode",),                   "ZCode",             "agentic IDE"),
+    (("augment",),                 "Augment Code",      "agentic IDE"),
+    (("kiro",),                    "Kiro",              "agentic IDE"),
+    (("antigravity",),             "Antigravity",       "agentic IDE"),
+    (("pearai",),                  "PearAI",            "agentic IDE"),
+    (("ide.aide",),                "Aide",              "agentic IDE"),
+    (("zed",),                     "Zed",               "agentic IDE"),
+    (("warp",),                    "Warp",              "agentic IDE"),
+    (("codeflicker",),             "CodeFlicker",       "agentic IDE"),
+    (("codebuddy",),               "CodeBuddy",         "agentic IDE"),
+    (("catpaw",),                  "CatPaw",            "agentic IDE"),
+    # --- IDE 扩展 agent ---
+    (("roo-code",),                "Roo Code",          "IDE 扩展"),
+    (("roocode",),                 "Roo Code",          "IDE 扩展"),
+    (("kilo-code",),               "Kilo Code",         "IDE 扩展"),
+    (("kilo",),                    "Kilo Code",         "IDE 扩展"),
+    (("cline",),                   "Cline",             "IDE 扩展"),
+    (("continue",),                "Continue",          "IDE 扩展"),
+    (("amp",),                     "Amp",               "IDE 扩展"),
+    # --- 终端 CLI agent ---
+    (("claude",),                  "Claude Code",       "终端 CLI"),
+    (("codex",),                   "Codex CLI",         "终端 CLI"),
+    (("gemini",),                  "Gemini CLI",        "终端 CLI"),
+    (("aider",),                   "Aider",             "终端 CLI"),
+    (("opencode",),                "OpenCode",          "终端 CLI"),
+    (("goose",),                   "Goose",             "终端 CLI"),
+    (("qwen-code",),               "Qwen Code",         "终端 CLI"),
+    (("kimi-cli",),                "Kimi CLI",          "终端 CLI"),
+    (("iflow",),                   "iFlow CLI",         "终端 CLI"),
+    (("codebuff",),                "Codebuff",          "终端 CLI"),
+    (("charm",),                   "Charm",             "终端 CLI"),
+    (("openhands",),               "OpenHands",         "终端 CLI"),
+    (("conductor",),               "Conductor",         "终端 CLI"),
+    (("rovo",),                    "Rovo Dev",          "终端 CLI"),
+    (("codegeex",),                "CodeGeeX",          "终端 CLI"),
+    # --- 平台 / 服务 agent ---
+    (("copilot",),                 "GitHub Copilot",    "平台服务"),
+    (("q-developer",),             "Amazon Q Developer","平台服务"),
+    (("amazon-q",),                "Amazon Q Developer","平台服务"),
+    (("junie",),                   "JetBrains Junie",   "平台服务"),
+    (("cody",),                    "Cody",              "平台服务"),
+    (("coderabbit",),              "CodeRabbit",        "平台服务"),
+    (("qodo",),                    "Qodo",              "平台服务"),
+    (("replit",),                  "Replit",            "平台服务"),
+    (("devin",),                   "Devin",             "平台服务"),
+    (("factory",),                 "Factory",           "平台服务"),
+    (("magic",),                   "Magic",             "平台服务"),
+    (("jules",),                   "Jules",             "平台服务"),
+    (("devchat",),                 "DevChat",           "平台服务"),
+    (("genie",),                   "Genie",             "平台服务"),
+    (("lingma",),                  "通义灵码",           "平台服务"),
+    (("comate",),                  "文心快码",           "平台服务"),
+    (("doubao",),                  "豆包编程",           "平台服务"),
+    (("xiong",),                   "代码小浣熊",         "平台服务"),
+    # --- 桌面 agent ---
+    (("raccoon",),                 "Raccoon",           "桌面客户端"),
+    (("workbuddy",),               "WorkBuddy",         "桌面客户端"),
+    (("marvis",),                  "Marvis",            "桌面客户端"),
+    (("mmx-agent",),               "MMX Agent",         "桌面客户端"),
+    (("agnescode",),               "AgnesCode",         "桌面客户端"),
 ]
 
-# 段级精确匹配（避免短词子串误判）
+# 非 agent 工具：仍自动识别徽标，但不作为特色重点展示。
+DEVTOOL_VENDOR_RULES = [
+    (("puppeteer",),               "Puppeteer",        "开发工具"),
+    (("playwright",),              "Playwright",       "开发工具"),
+    (("homebrew",),                "Homebrew",         "开发工具"),
+    (("cacache",),                 "npm",              "开发工具"),
+    (("node-gyp",),                "node-gyp",         "开发工具"),
+    (("electron-builder",),        "electron-builder", "开发工具"),
+    (("_npx",),                    "npm",              "开发工具"),
+    (("tabbit",),                  "Tabbit",           "浏览器"),
+    (("bambu",),                   "Bambu Studio",     "应用"),
+]
+
+# 段级精确匹配（避免短词子串误判；均为非 agent 工具）
 VENDOR_SEGMENT_RULES = [
     (("uv",),                      "uv",              "开发工具"),
     (("node",),                    "Node.js",         "开发工具"),
@@ -103,16 +159,19 @@ VENDOR_SEGMENT_RULES = [
 ]
 
 def _identify_vendor(path_str: str):
-    """根据路径识别归属软件与归类；未命中返回 (None, None)。"""
+    """根据路径识别归属软件、归类与是否 agent；未命中返回 (None, None, False)。"""
     low = path_str.lower()
-    for keywords, name, cat in VENDOR_RULES:
+    for keywords, name, cat in AGENT_VENDOR_RULES:
         if any(k in low for k in keywords):
-            return name, cat
+            return name, cat, True
+    for keywords, name, cat in DEVTOOL_VENDOR_RULES:
+        if any(k in low for k in keywords):
+            return name, cat, False
     low_parts = {p.lower() for p in Path(path_str).parts}
     for keywords, name, cat in VENDOR_SEGMENT_RULES:
         if any(k in low_parts for k in keywords):
-            return name, cat
-    return None, None
+            return name, cat, False
+    return None, None, False
 
 
 # ---------------------------------------------------------------------------
@@ -180,7 +239,7 @@ def scan() -> dict:
                         continue
                     size = _dir_size(child)
                     if size > 0:
-                        vendor, vendor_category = _identify_vendor(str(child))
+                        vendor, vendor_category, is_agent = _identify_vendor(str(child))
                         items.append({
                             "path": str(child),
                             "size": size,
@@ -188,6 +247,7 @@ def scan() -> dict:
                             "category": category,
                             "vendor": vendor,
                             "vendor_category": vendor_category,
+                            "is_agent": is_agent,
                         })
             except (OSError, PermissionError):
                 continue
