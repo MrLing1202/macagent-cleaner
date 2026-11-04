@@ -44,8 +44,8 @@ macagent-cleaner 是运行在你 Mac 上的轻量清理器，专门为 **agent �
 
 ### 🏷️ 软件归属自动识别
 - 每个缓存目录自动识别**归属软件**与**归类**（如 `@qoder-updater/Cache` → **Qoder · agentic IDE**）
-- **agent 软件**全部以高亮徽标展示——这才是核心，一眼看出缓存在为哪个 agent 打工
-- 非 agent 的开发工具、浏览器与应用同样识别，但徽标低调，不占重点位
+- **agent 软件**全部以高亮标签展示——这才是核心，一眼看出缓存在为哪个 agent 打工
+- 非 agent 的开发工具、浏览器与应用同样识别，但标签低调，不占重点位
 
 ### ⏰ 定时自动检查
 - 页面内置自动检查：每 5 / 15 / 30 / 60 分钟自动重新扫描
@@ -86,11 +86,11 @@ python3 cleaner.py --paths '["/Users/me/Library/Caches/com.apple.Safari"]'
 
 ## 🧹 它在清谁的缓存
 
-扫描结果中，每个缓存目录会**自动标注归属徽标**（软件名 + 归类）。**agent 软件是核心重点**，全网主流 agent 全覆盖、高亮展示；非 agent 工具只做低调识别，不占重点位。
+扫描结果中，每个缓存目录会**自动标注归属标签**（软件名 + 归类）。**agent 软件是核心重点**，全网主流 agent 全覆盖、高亮展示；非 agent 工具只做低调识别，不占重点位。
 
 ### agent 软件 · 特色重点
 
-| 归类 | 徽标覆盖 |
+| 归类 | 标签覆盖 |
 | --- | --- |
 | **agentic IDE** | Qoder · Trae · Cursor · Windsurf · ZCode · Augment Code · Kiro · Antigravity · PearAI · Aide · Zed · Warp · CodeFlicker · CodeBuddy · CatPaw |
 | **IDE 扩展** | Cline · Roo Code · Kilo Code · Continue · Amp |
@@ -98,7 +98,7 @@ python3 cleaner.py --paths '["/Users/me/Library/Caches/com.apple.Safari"]'
 | **平台服务** | GitHub Copilot · Amazon Q Developer · JetBrains Junie · Cody · CodeRabbit · Qodo · Replit · Devin · Factory · Magic · Jules · DevChat · Genie · 通义灵码 · 文心快码 · 豆包编程 · 代码小浣熊 |
 | **桌面客户端** | Raccoon · WorkBuddy · Marvis · MMX Agent · AgnesCode |
 
-> 非 agent 的开发工具、浏览器与应用（Playwright、Homebrew、uv、Node.js、Edge、Tabbit、Bambu Studio 等）同样自动识别，但徽标低调处理，不在上表之列。
+> 非 agent 的开发工具、浏览器与应用同样自动识别，但标签低调处理，不在上表之列。
 
 > 匹配规则集中在 `scanner.py` 的 `AGENT_VENDOR_RULES` / `DEVTOOL_VENDOR_RULES`，未命中的目录标记为通用项，可自行扩展。
 
@@ -134,7 +134,7 @@ macagent-cleaner/
 - [x] 真实运行截图
 - [x] 软件归属自动识别
 - [x] 定时自动检查（间隔 + 阈值提醒）
-- [x] agent 软件徽标全量覆盖（agent 高亮重点 / 非 agent 低调识别）
+- [x] agent 软件标签全量覆盖（agent 高亮重点 / 非 agent 低调识别）
 - [ ] Linux 路径适配（`~/.cache` / `~/.config` 体系）
 - [ ] 清理统计与报告导出
 - [ ] 更多 agent 软件缓存目录覆盖

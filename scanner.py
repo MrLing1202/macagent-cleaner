@@ -68,7 +68,7 @@ CACHE_NAME_HINT = "cache"
 
 # 路径关键词 -> (软件名, 归类)。按顺序匹配，命中即归属。
 # 关键词用小写，匹配路径的目录名片段。
-# agent 软件是核心归类：全网主流 agent 类工具全部收录，徽标作为特色重点。
+# agent 软件是核心归类：全网主流 agent 类工具全部收录，标签作为特色重点。
 AGENT_VENDOR_RULES = [
     # --- agentic IDE / 编辑器 ---
     (("opencodedesktop",),         "OpenCode",          "agentic IDE"),
@@ -138,7 +138,7 @@ AGENT_VENDOR_RULES = [
     (("agnescode",),               "AgnesCode",         "桌面客户端"),
 ]
 
-# 非 agent 工具：仍自动识别徽标，但不作为特色重点展示。
+# 非 agent 工具：仍自动识别标签，但不作为特色重点展示。
 DEVTOOL_VENDOR_RULES = [
     (("puppeteer",),               "Puppeteer",        "开发工具"),
     (("playwright",),              "Playwright",       "开发工具"),
