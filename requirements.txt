@@ -1,0 +1,7 @@
+# macagent-cleaner 运行时依赖
+# 本项目基于 Python 3 标准库实现（os / pathlib / shutil / http.server），
+# 无需任何第三方依赖。直接运行即可：
+#
+#   python3 webui.py
+#
+# 若需生成更完整的项目环境，可在此追加依赖（当前为空）：
