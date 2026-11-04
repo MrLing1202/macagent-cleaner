@@ -9,6 +9,8 @@
   <a href="#这是什么">这是什么</a> •
   <a href="#功能特性">功能特性</a> •
   <a href="#快速开始">快速开始</a> •
+  <a href="#界面预览">界面预览</a> •
+  <a href="#它在清谁的缓存">它在清谁的缓存</a> •
   <a href="#安全边界">安全边界</a> •
   <a href="#项目结构">项目结构</a> •
   <a href="#开发计划">开发计划</a>
@@ -60,6 +62,41 @@ python3 scanner.py --output scan.json
 python3 cleaner.py --paths '["/Users/me/Library/Caches/com.apple.Safari"]'
 ```
 
+## 🖼️ 界面预览
+
+真实运行截图（macOS，扫描结果 2.2 GB 可清理）：
+
+| 扫描结果分级 | 勾选待清理 |
+| --- | --- |
+| ![main](docs/main.png) | ![clean](docs/clean.png) |
+
+左侧为三级风险分区展示，右侧为低风险默认勾选、一键移入废纸篓的状态。
+
+## 🧹 它在清谁的缓存
+
+市面上常见的 agent 类软件，按形态归类（本工具扫描时重点覆盖这类软件的更新缓存目录）：
+
+| 软件 | 归类 | 说明 |
+| --- | --- | --- |
+| Cursor | IDE 编辑器 | VS Code 内核编码助手，Agent 模式 |
+| Windsurf | IDE 编辑器 | Flow 式编码体验，自研模型 |
+| Trae | IDE 编辑器 | 原生轻量 IDE，Builder 模式 |
+| Qoder | IDE 编辑器 | 企业级智能编程平台 |
+| Kiro | IDE 编辑器 | 多文件编辑与任务规划 |
+| Cline | IDE 插件 | 开源 VS Code 扩展 |
+| Claude Code | 终端 CLI | 终端优先的 agent 工作流 |
+| Codex CLI | 终端 CLI | 终端编码代理 |
+| Gemini CLI | 终端 CLI | 终端编码代理 |
+| OpenCode | 终端 CLI | 开源终端 agent |
+| ZCode | 桌面客户端 | 桌面 agent 客户端 |
+| Raccoon | 桌面客户端 | 桌面 agent 客户端 |
+| WorkBuddy | 桌面客户端 | 桌面 agent 客户端 |
+| Marvis | 桌面客户端 | 本地 agent 运行环境 |
+| Lovable | 浏览器平台 | 网页零配置构建 |
+| Bolt | 浏览器平台 | 网页快速原型 |
+| v0 | 浏览器平台 | Vercel 网页生成 |
+| Firebase Studio | 浏览器平台 | 浏览器端开发环境 |
+
 ## 🔒 安全边界
 
 | 边界 | 说明 |
@@ -77,6 +114,9 @@ macagent-cleaner/
 ├── scanner.py     # 磁盘占用扫描与风险分级（只读）
 ├── cleaner.py     # 路径安全校验与移入废纸篓
 ├── webui.py       # 本地网页界面（眼动仪友好）
+├── docs/
+│   ├── main.png   # 扫描结果分级截图
+│   └── clean.png  # 勾选待清理截图
 ├── requirements.txt
 └── README.md
 ```
@@ -86,9 +126,10 @@ macagent-cleaner/
 - [x] 只读扫描与三级分级
 - [x] 废纸篓清理与安全校验
 - [x] 本地网页界面
-- [ ] 截图与文档完善
+- [x] 真实运行截图
 - [ ] 定时扫描提醒
 - [ ] 清理统计与报告导出
+- [ ] 更多 agent 软件缓存目录覆盖
 
 ## 🤝 参与贡献
 
